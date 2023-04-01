@@ -47,7 +47,7 @@ const AppLayout = ({ children }) => {
         </Col>
         <Col xs={24} md={6}>
           <a
-            href="https://www.naver.com/"
+            href="https://velog.io/@mocakosan"
             target="_blank"
             rel=" noreferrer noopener"
           >
@@ -55,7 +55,6 @@ const AppLayout = ({ children }) => {
           </a>
         </Col>
       </Row>
-      {children}
     </div>
   );
 };
