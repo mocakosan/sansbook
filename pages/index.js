@@ -2,9 +2,11 @@ import AppLayout from "../components/AppLayout";
 
 const Home = () => {
   return (
-    <AppLayout>
-      <div>hello ,next</div>
-    </AppLayout>
+    <>
+      <AppLayout>
+        <div>hello ,next</div>
+      </AppLayout>
+    </>
   );
 };
 
