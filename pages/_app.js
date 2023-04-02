@@ -1,7 +1,7 @@
 import "antd/dist/antd.css";
 import PropTypes from "prop-types";
 import Head from "next/head";
-import Title from "antd/lib/skeleton/Title";
+import wrapper from "../store/configureStore";
 
 const Sansbook = ({ Component }) => {
   return (
@@ -19,4 +19,4 @@ Sansbook.propTypes = {
   Component: PropTypes.elementType.isRequired,
 };
 
-export default Sansbook;
+export default wrapper.withRedux(Sansbook);
