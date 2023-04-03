@@ -3,7 +3,7 @@ import { useState, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Link from "next/link";
-import { loginAction } from "../reducers";
+import { loginAction } from "../reducers/user";
 import useInput from "./hooks/useInput";
 
 const ButtonWrapper = styled.div`
