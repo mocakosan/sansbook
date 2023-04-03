@@ -1,9 +1,14 @@
 import { createWrapper } from "next-redux-wrapper";
-import { createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import reducer from "../reducers/index";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const configureStore = () => {
-  const store = createStore(reducer);
+  const enhancer =
+    process.env.NODE_ENV === "production"
+      ? compose(applyMiddleware([]))
+      : composeWithDevTools(applyMiddleware([]));
+  const store = createStore(reducer, enhancer);
   store.dispatch({
     type: "CHANGE_NICKNAME",
     data: "jangsan",
