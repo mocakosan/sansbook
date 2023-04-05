@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function* rootSaga() {}","map":{"version":3,"names":["rootSaga"],"sources":["/Users/js/Desktop/sansbook/sagas/index.js"],"sourcesContent":["export default function* rootSaga() {}\n"],"mappings":"AAAA,eAAe,UAAUA,QAAQA,CAAA,EAAG,CAAC"},"metadata":{},"sourceType":"module"}
