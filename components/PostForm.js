@@ -1,18 +1,30 @@
 import { Form, Input, Button } from "antd";
-import { useCallback, useState, useRef } from "react";
+import { useCallback, useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../reducers/post";
+import { ADD_POST_REQUEST } from "../reducers/post";
+import useInput from "./hooks/useInput";
 
 const PostForm = () => {
-  const { imagePaths } = useSelector((state) => state.post);
+  const { imagePaths, addPostDone, addPostLoading } = useSelector(
+    (state) => state.post
+  );
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const imageInput = useRef();
+  useEffect(() => {
+    if (addPostDone) {
+      setText("");
+    }
+  }, [addPostDone]);
+
+  const onSubmitForm = useCallback(() => {
+    dispatch({
+      type: ADD_POST_REQUEST,
+      data: text,
+    });
+  }, [text]);
   const onChangeText = useCallback((e) => {
     setText(e.target.value);
-  }, []);
-  const onSubmit = useCallback(() => {
-    dispatch(addPost);
   }, []);
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
@@ -21,7 +33,7 @@ const PostForm = () => {
     <Form
       style={{ margin: "10px 0 20px" }}
       encType="multipart/form-data"
-      onFinish={onSubmit}
+      onFinish={onSubmitForm}
     >
       <Input.TextArea
         value={text}
@@ -32,7 +44,12 @@ const PostForm = () => {
       <div>
         <input type="file" multiple hidden ref={imageInput} />
         <Button onClick={onClickImageUpload}>이미지 업로드</Button>
-        <Button type="primary" style={{ float: "right" }} htmlType="submit">
+        <Button
+          type="primary"
+          style={{ float: "right" }}
+          htmlType="submit"
+          loading={addPostLoading}
+        >
           짹쨱
         </Button>
       </div>
