@@ -45,13 +45,24 @@ export const UNFOLLOW_REQUEST = "UNFOLLOW_REQUEST";
 export const UNFOLLOW_SUCCESS = "UNFOLLOW_SUCCESS";
 export const UNFOLLOW_FAILURE = "UNFOLLOW_FAILURE";
 
+export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
+export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
+
 const dummyUser = (data) => ({
   ...data,
   nickname: "jangsan",
   id: 1,
-  Posts: [],
-  Followings: [],
-  Followers: [],
+  Posts: [{ id: 1 }],
+  Followings: [
+    { nickname: "부기초" },
+    { nickname: "Chanho Lee" },
+    { nickname: "neue zeal" },
+  ],
+  Followers: [
+    { nickname: "부기초" },
+    { nickname: "Chanho Lee" },
+    { nickname: "neue zeal" },
+  ],
 });
 
 // action당 3가지씩 Request,Success,Failure
@@ -158,6 +169,22 @@ const reducer = (state = initialState, action) => {
         changeNicknameError: action.error,
       };
     }
+    case ADD_POST_TO_ME:
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          Posts: [{ id: action.data }, ...state.me.Posts],
+        },
+      };
+    case REMOVE_POST_OF_ME:
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          Posts: state.me.Posts.filter((v) => v.id !== action.data),
+        },
+      };
     default: {
       return {
         ...state,

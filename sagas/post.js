@@ -15,7 +15,12 @@ import {
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
+  REMOVE_POST_REQUEST,
+  REMOVE_POST_SUCCESS,
+  REMOVE_POST_FAILURE,
 } from "../reducers/post";
+import { REMOVE_POST_OF_ME, ADD_POST_TO_ME } from "../reducers/user";
+import shortId from "shortid";
 
 //all 배열안에 있는것들을 한번에 실행
 //fork 비동기 함수 호출
@@ -30,14 +35,48 @@ function* addPost(action) {
   try {
     //const result = yield fork(addPostAPI, action.data);
     yield delay(1000);
+    const id = shortId.generate();
     yield put({
       //put : dispatch
       type: ADD_POST_SUCCESS,
-      data: action.data,
+      data: {
+        id,
+        content: action.data,
+      },
+    });
+    yield put({
+      type: ADD_POST_TO_ME,
+      data: id,
     });
   } catch (err) {
     yield put({
       type: ADD_POST_FAILURE,
+      data: err.response.data,
+    });
+  }
+}
+
+//RemovePost
+function removePostAPI(data) {
+  return axios.post("/api/post", data);
+}
+
+function* removePost(action) {
+  try {
+    //const result = yield fork(removePostAPI, action.data);
+    yield delay(1000);
+    yield put({
+      //put : dispatch
+      type: REMOVE_POST_SUCCESS,
+      data: action.data,
+    });
+    yield put({
+      type: REMOVE_POST_OF_ME,
+      data: action.data,
+    });
+  } catch (err) {
+    yield put({
+      type: REMOVE_POST_FAILURE,
       data: err.response.data,
     });
   }
@@ -68,6 +107,9 @@ function* addComment(action) {
 function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 }
+function* watchRemovePost() {
+  yield takeLatest(REMOVE_POST_REQUEST, removePost);
+}
 function* watchAddComment() {
   yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 }
@@ -77,5 +119,5 @@ function* watchAddComment() {
 //throttle 시간제한을 두고 그 시간안에는 한번만 실행
 
 export default function* postSaga() {
-  yield all([fork(watchAddPost), fork(watchAddComment)]);
+  yield all([fork(watchAddPost), fork(watchRemovePost), fork(watchAddComment)]);
 }
