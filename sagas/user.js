@@ -74,14 +74,13 @@ function* logOut() {
 }
 
 //SignUp
-function signUpAPI() {
-  return axios.post("/api/logout");
+function signUpAPI(data) {
+  return axios.post("http://localhost:3001/user", data);
 }
 
-function* signUp() {
+function* signUp(action) {
   try {
-    //const result = yield fork(signUpAPI);
-    yield delay(1000);
+    const result = yield call(signUpAPI, action.data);
     yield put({
       //put : dispatch
       type: SIGN_UP_SUCCESS,
