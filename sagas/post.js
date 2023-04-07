@@ -6,12 +6,17 @@ import {
   call,
   put,
   delay,
+  throttle,
 } from "redux-saga/effects";
 import axios from "axios";
 import {
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
   ADD_POST_FAILURE,
+  LOAD_POSTS_FAILURE,
+  LOAD_POSTS_REQUEST,
+  LOAD_POSTS_SUCCESS,
+  generateDummyPost,
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
@@ -25,6 +30,28 @@ import shortId from "shortid";
 //all 배열안에 있는것들을 한번에 실행
 //fork 비동기 함수 호출
 //call 동기 함수 호출
+
+//LoadPost
+function loadPostsAPI(data) {
+  return axios.get("/api/posts", data);
+}
+
+function* loadPosts(action) {
+  try {
+    // const result = yield call(loadPostsAPI, action.data);
+    yield delay(1000);
+    yield put({
+      type: LOAD_POSTS_SUCCESS,
+      data: generateDummyPost(10),
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_POSTS_FAILURE,
+      data: err.response.data,
+    });
+  }
+}
 
 //AddPost
 function addPostAPI(data) {
@@ -103,7 +130,9 @@ function* addComment(action) {
     });
   }
 }
-
+function* watchLoadPosts() {
+  yield throttle(5000, LOAD_POSTS_REQUEST, loadPosts);
+}
 function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 }
@@ -119,5 +148,10 @@ function* watchAddComment() {
 //throttle 시간제한을 두고 그 시간안에는 한번만 실행
 
 export default function* postSaga() {
-  yield all([fork(watchAddPost), fork(watchRemovePost), fork(watchAddComment)]);
+  yield all([
+    fork(watchAddPost),
+    fork(watchLoadPosts),
+    fork(watchRemovePost),
+    fork(watchAddComment),
+  ]);
 }

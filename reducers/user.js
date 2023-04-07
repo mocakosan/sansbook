@@ -9,6 +9,8 @@ import produce from "immer";
 // };
 
 export const initialState = {
+  mainPosts: [],
+  imagePaths: [],
   logInLoading: false, // 로그인 시도중
   logInDone: false,
   logInError: null,
@@ -19,8 +21,8 @@ export const initialState = {
   changeNicknameDone: false,
   changeNicknameError: null,
   me: null,
-  signUpData: {},
-  loginData: {},
+  // signUpData: {},
+  // loginData: {},
 };
 
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
