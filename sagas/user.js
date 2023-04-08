@@ -32,17 +32,16 @@ import {
 
 //LOGIN
 function logInAPI(data) {
-  return axios.post("/api/login", data);
+  return axios.post("/user/login", data);
 }
 
 function* logIn(action) {
   try {
-    yield delay(1000);
-    //const result = yield fork(logInAPI, action.data);
+    const result = yield call(logInAPI, action.data);
     yield put({
       //put : dispatch
       type: LOG_IN_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({
@@ -54,13 +53,13 @@ function* logIn(action) {
 
 //LOGOUT
 function logOutAPI() {
-  return axios.post("/api/logout");
+  return axios.post("/user/logout");
 }
 
 function* logOut() {
   try {
-    //const result = yield fork(logOutAPI);
-    yield delay(1000);
+    yield call(logOutAPI);
+
     yield put({
       //put : dispatch
       type: LOG_OUT_SUCCESS,
@@ -75,7 +74,7 @@ function* logOut() {
 
 //SignUp
 function signUpAPI(data) {
-  return axios.post("http://localhost:3001/user", data);
+  return axios.post("/user", data);
 }
 
 function* signUp(action) {
@@ -95,7 +94,7 @@ function* signUp(action) {
 
 //Follow
 function followAPI() {
-  return axios.post("/api/follow");
+  return axios.post("/follow");
 }
 
 function* follow(action) {
@@ -117,7 +116,7 @@ function* follow(action) {
 
 //UnFollow
 function unfollowAPI() {
-  return axios.post("/api/unfollow");
+  return axios.post("/unfollow");
 }
 
 function* unfollow(action) {

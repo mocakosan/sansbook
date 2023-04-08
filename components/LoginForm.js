@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,11 +10,17 @@ const LoginForm = () => {
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
   const dispatch = useDispatch();
-  const { logInLoading } = useSelector((state) => state.user);
+  const { logInLoading, logInError } = useSelector((state) => state.user);
+  useEffect(() => {
+    if (logInError) {
+      alert(logInError);
+    }
+  }, [logInError]);
 
   //로그인 버튼을 누르면  onSubmitform에서 loginRequestAction실행 ->
   //Sagas/user.js 에서 login실행되고 동시에 reducer/user 에서 switch문에서 LOG_IN_REQUEST 실행
   const onSubmitForm = useCallback(() => {
+    console.log(email, password);
     dispatch(
       loginRequestAction({
         email,
