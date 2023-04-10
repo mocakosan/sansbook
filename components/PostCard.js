@@ -9,22 +9,39 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import PostImages from "./PostImages";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CommentForm from "./CommentForm";
 import PostCardContent from "./PostCardContent";
 import FollowButton from "./FollowButton";
-import { REMOVE_POST_REQUEST } from "../reducers/post";
+import {
+  REMOVE_POST_REQUEST,
+  LIKE_POST_REQUEST,
+  UNLIKE_POST_REQUEST,
+} from "../reducers/post";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.user.me?.id);
   const { removePostLoading } = useSelector((state) => state.post);
-  const [liked, setLiked] = useState(false);
   const [commentFormOpened, setCommentFormOpened] = useState(false);
-  const onToggleLike = useCallback(() => {
-    //false -> true, true -> false
-    setLiked((prev) => !prev);
-  }, []);
+  const id = useSelector((state) => state.user.me?.id);
+  const onLike = useCallback(() => {
+    if (!id) {
+      return alert("로그인이 필요합니다.");
+    }
+    dispatch({
+      type: LIKE_POST_REQUEST,
+      data: post.id,
+    });
+  }, [id]);
+  const onUnLike = useCallback(() => {
+    if (!id) {
+      return alert("로그인이 필요합니다.");
+    }
+    dispatch({
+      type: UNLIKE_POST_REQUEST,
+      data: post.id,
+    });
+  }, [id]);
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpened((prev) => !prev);
@@ -35,7 +52,8 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, []);
-  console.log("@@@@@", post.content);
+  console.log(post);
+  const liked = post.Likers.find((v) => v.id === id);
   return (
     <div style={{ marginBottom: 10 }}>
       <Card
@@ -46,17 +64,17 @@ const PostCard = ({ post }) => {
             <HeartTwoTone
               twoToneColor="#eb2f96"
               key="heart"
-              onClick={onToggleLike}
+              onClick={onUnLike}
             />
           ) : (
-            <HeartOutlined key="heart" onClick={onToggleLike} />
+            <HeartOutlined key="heart" onClick={onLike} />
           ),
           <MessageOutlined key="message" onClick={onToggleComment} />,
           <Popover
             key="more"
             content={
               <Button.Group>
-                {id && post.User?.id === id ? (
+                {id && post.user?.id === id ? (
                   <>
                     <Button>수정</Button>
                     <Button
@@ -115,6 +133,7 @@ PostCard.propTypes = {
     createdAt: PropTypes.string,
     Comment: PropTypes.arrayOf(PropTypes.object),
     Images: PropTypes.arrayOf(PropTypes.object),
+    Likers: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
 
