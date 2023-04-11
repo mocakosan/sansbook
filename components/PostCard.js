@@ -47,11 +47,14 @@ const PostCard = ({ post }) => {
     setCommentFormOpened((prev) => !prev);
   }, []);
   const onRemovePost = useCallback(() => {
+    if (!id) {
+      return alert("로그인이 필요합니다.");
+    }
     dispatch({
       type: REMOVE_POST_REQUEST,
       data: post.id,
     });
-  }, []);
+  }, [id]);
   console.log(post);
   const liked = post.Likers.find((v) => v.id === id);
   return (

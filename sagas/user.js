@@ -27,7 +27,11 @@ import {
   LOAD_MY_INFO_FAILURE,
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
+  CHANGE_NICKNAME_REQUEST,
+  CHANGE_NICKNAME_SUCCESS,
+  CHANGE_NICKNAME_FAILURE,
 } from "../reducers/user";
+import { REMOVE_POST_REQUEST } from "../reducers/post";
 
 //all 배열안에 있는것들을 한번에 실행
 //fork 비동기 함수 호출
@@ -159,6 +163,36 @@ function* unfollow(action) {
     });
   }
 }
+
+//ChangeNickname
+function changeNicknameAPI(data) {
+  return axios.patch("/user/nickname", { nickname: data });
+}
+
+function* changeNickname(action) {
+  try {
+    const result = yield call(changeNicknameAPI, action.data);
+    yield put({
+      type: CHANGE_NICKNAME_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: CHANGE_NICKNAME_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function* watchChangeNickname() {
+  yield takeLatest(CHANGE_NICKNAME_REQUEST, changeNickname);
+}
+
+function* watchRemovePost() {
+  yield takeLatest(REMOVE_POST_REQUEST, removePost);
+}
+
 function* watchLoadMyInfo() {
   yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);
 }
@@ -195,5 +229,6 @@ export default function* userSaga() {
     fork(watchFollow),
     fork(watchUnfollow),
     fork(watchLoadMyInfo),
+    fork(watchChangeNickname),
   ]);
 }
