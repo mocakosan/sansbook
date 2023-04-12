@@ -36,6 +36,9 @@ import {
   LOAD_FOLLOWINGS_FAILURE,
   LOAD_FOLLOWINGS_REQUEST,
   LOAD_FOLLOWINGS_SUCCESS,
+  REMOVE_FOLLOWER_FAILURE,
+  REMOVE_FOLLOWER_REQUEST,
+  REMOVE_FOLLOWER_SUCCESS,
 } from "../reducers/user";
 
 //all 배열안에 있는것들을 한번에 실행
@@ -211,6 +214,27 @@ function* loadFollowings(action) {
   }
 }
 
+//RemoveFollower
+function removeFollowerAPI(data) {
+  return axios.delete(`/user/follower/${data}`);
+}
+
+function* removeFollower(action) {
+  try {
+    const result = yield call(removeFollowerAPI, action.data);
+    yield put({
+      type: REMOVE_FOLLOWER_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: REMOVE_FOLLOWER_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 //ChangeNickname
 function changeNicknameAPI(data) {
   return axios.patch("/user/nickname", { nickname: data });
@@ -256,6 +280,10 @@ function* watchLoadFollowings() {
   yield takeLatest(LOAD_FOLLOWINGS_REQUEST, loadFollowings);
 }
 
+function* watchRemoveFollower() {
+  yield takeLatest(REMOVE_FOLLOWER_REQUEST, removeFollower);
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn); //take("LOG_IN") : 로그인이란 액션이 실행될때까지 기다림
 }
@@ -281,6 +309,7 @@ export default function* userSaga() {
     fork(watchUnfollow),
     fork(watchLoadFollowers),
     fork(watchLoadFollowings),
+    fork(watchRemoveFollower),
     fork(watchLoadMyInfo),
     fork(watchChangeNickname),
   ]);
