@@ -2,12 +2,26 @@ import AppLayout from "../components/AppLayout";
 import Head from "next/head";
 import NicknameEditForm from "../components/NicknameEditForm";
 import FollowList from "../components/FollowList";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Router from "next/router";
+import {
+  LOAD_FOLLOWERS_REQUEST,
+  LOAD_FOLLOWINGS_REQUEST,
+} from "../reducers/user";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
+  useEffect(() => {
+    dispatch({
+      type: LOAD_FOLLOWINGS_REQUEST,
+    });
+    dispatch({
+      type: LOAD_FOLLOWERS_REQUEST,
+    });
+  }, []);
+  console.log("@@@@@@", me);
   useEffect(() => {
     if (!(me && me.id)) {
       Router.push("/");
