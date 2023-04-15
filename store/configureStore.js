@@ -13,7 +13,7 @@ const loggerMiddleware =
     return next(action);
   };
 
-const configureStore = (context) => {
+const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware, loggerMiddleware];
   const enhancer =
