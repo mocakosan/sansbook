@@ -24,6 +24,9 @@ import {
   UNFOLLOW_FAILURE,
   UNFOLLOW_REQUEST,
   UNFOLLOW_SUCCESS,
+  LOAD_USER_FAILURE,
+  LOAD_USER_REQUEST,
+  LOAD_USER_SUCCESS,
   LOAD_MY_INFO_FAILURE,
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
@@ -45,7 +48,7 @@ import {
 //fork 비동기 함수 호출
 //call 동기 함수 호출
 
-//Load_MY_INFO_USER : 로그인 유(새로고침해도 안풀리게)
+//Load_MY_INFO_USER : 로그인 유(새로고침해도 안풀리게) 내정보
 function loadMyInfoAPI() {
   return axios.get("/user");
 }
@@ -61,6 +64,27 @@ function* loadMyInfo() {
     console.error(err);
     yield put({
       type: LOAD_MY_INFO_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+//LoadUser : 상대방 정보
+function loadUserAPI(data) {
+  return axios.get(`/user/${data}`);
+}
+
+function* loadUser(action) {
+  try {
+    const result = yield call(loadUserAPI, action.data);
+    yield put({
+      type: LOAD_USER_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_USER_FAILURE,
       error: err.response.data,
     });
   }
@@ -264,6 +288,10 @@ function* watchLoadMyInfo() {
   yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);
 }
 
+function* watchLoadUser() {
+  yield takeLatest(LOAD_USER_REQUEST, loadUser);
+}
+
 function* watchFollow() {
   yield takeLatest(FOLLOW_REQUEST, follow);
 }
@@ -311,6 +339,7 @@ export default function* userSaga() {
     fork(watchLoadFollowings),
     fork(watchRemoveFollower),
     fork(watchLoadMyInfo),
+    fork(watchLoadUser),
     fork(watchChangeNickname),
   ]);
 }
