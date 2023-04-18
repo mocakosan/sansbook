@@ -7,10 +7,12 @@ import { useEffect } from "react";
 import Router from "next/router";
 import { LOAD_USER_REQUEST } from "../reducers/user";
 import { END } from "redux-saga";
+import wrapper from "../store/configureStore";
+import { Card, Avatar } from "antd";
 
 const About = () => {
   const { userInfo } = useSelector((state) => state.user);
-
+  console.log(userInfo);
   return (
     <>
       <AppLayout>
@@ -28,12 +30,12 @@ const About = () => {
               <div key="following">
                 팔로잉
                 <br />
-                {userInfo.Followings}
+                {userInfo.Followings.length}
               </div>,
               <div key="follower">
                 팔로워
                 <br />
-                {userInfo.Followers}
+                {userInfo.Followers.length}
               </div>,
             ]}
           >
@@ -50,13 +52,14 @@ const About = () => {
 };
 
 //SSR : next전용 서버사이드 렌더링 = 사용
-export const getStaticProps = wrapper.getStaticProps(async (context) => {
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   console.log("getStaticProps");
-  context.store.dispatch({
+  store.dispatch({
     type: LOAD_USER_REQUEST,
-    data: 1,
+    data: 2,
   });
-  context.store.dispatch(END);
-  await context.store.sagaTask.toPromise();
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
 });
+
 export default About;
