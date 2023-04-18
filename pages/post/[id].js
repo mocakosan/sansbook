@@ -17,7 +17,7 @@ const Post = () => {
   const { id } = router.query;
 
   // if (router.isFallback) {
-  //   return <div>Loading...</div>
+  //   return <div>Loading...</div>;
   // }
 
   return (
