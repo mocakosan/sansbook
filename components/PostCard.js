@@ -19,6 +19,7 @@ import {
   UNLIKE_POST_REQUEST,
   RETWEET_REQUEST,
 } from "../reducers/post";
+import Link from "next/link";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ const PostCard = ({ post }) => {
   }, []);
 
   const liked = post.Likers?.find((v) => v.id === id);
+
   return (
     <div style={{ marginBottom: 10 }}>
       <Card
@@ -121,15 +123,27 @@ const PostCard = ({ post }) => {
             }
           >
             <Card.Meta
-              avatar={<Avatar>{post.Retweet.user?.nickname[0]}</Avatar>}
-              title={post.Retweet.user?.nickname}
+              avatar={
+                <Link href={`/user/${post.Retweet.user.id}`}>
+                  <a>
+                    <Avatar>{post.Retweet.user.nickname[0]}</Avatar>
+                  </a>
+                </Link>
+              }
+              title={post.Retweet.user.nickname}
               description={<PostCardContent postData={post.Retweet.content} />}
             />
           </Card>
         ) : (
           <Card.Meta
-            avatar={<Avatar>{post.user?.nickname[0]}</Avatar>}
-            title={post.user?.nickname}
+            avatar={
+              <Link href={`/user/${post.user.id}`}>
+                <a>
+                  <Avatar>{post.user.nickname[0]}</Avatar>
+                </a>
+              </Link>
+            }
+            title={post.user.nickname}
             description={<PostCardContent postData={post.content} />}
           />
         )}
@@ -145,7 +159,13 @@ const PostCard = ({ post }) => {
               <li>
                 <Comment
                   author={item.user?.nickname}
-                  avatar={<Avatar>{item.user?.nickname[0]}</Avatar>}
+                  avatar={
+                    <Link href={`/user/${item.user?.id}`}>
+                      <a>
+                        <Avatar>{item.user?.nickname[0]}</Avatar>
+                      </a>
+                    </Link>
+                  }
                   content={item.content}
                 />
               </li>
