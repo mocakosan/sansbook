@@ -77,17 +77,17 @@ const User = () => {
             <div key="twit">
               짹짹
               <br />
-              {userInfo.Posts}
+              {userInfo?.Posts}
             </div>,
             <div key="following">
               팔로잉
               <br />
-              {userInfo.Followings}
+              {userInfo?.Followings}
             </div>,
             <div key="follower">
               팔로워
               <br />
-              {userInfo.Followers}
+              {userInfo?.Followers}
             </div>,
           ]}
         >
@@ -108,7 +108,7 @@ const User = () => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const cookie = context.req ? context.req.headers.cookie : "";
-    axios.defaults.headers.Cookie = cookie;
+    axios.defaults.headers.Cookie = "";
     if (context.req && cookie) {
       //쿠키를 써서 요청을 보냈을떄만 잠시 보관해두었다가 쿠키 안써서 요청보낼떄는 서버에서 공유하고 있는 쿠키를 제거하는
       axios.defaults.headers.Cookie = cookie; //잘못하면 내 뒤로 로그인하는 사람이 내쿠키를 공유해서 내정보로 로그인하는 현상이 일어나서 해두는 조치

@@ -95,7 +95,7 @@ function* loadPost(action) {
 
 //LoadPosts
 function loadPostsAPI(lastId) {
-  return axios.get(`/posts?last=${lastId || 0}`);
+  return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 
 function* loadPosts(action) {
