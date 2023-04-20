@@ -52,14 +52,15 @@ const About = () => {
 };
 
 //SSR : next전용 서버사이드 렌더링 = 사용
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-  console.log("getStaticProps");
-  store.dispatch({
-    type: LOAD_USER_REQUEST,
-    data: 2,
-  });
-  store.dispatch(END);
-  await store.sagaTask.toPromise();
-});
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    store.dispatch({
+      type: LOAD_USER_REQUEST,
+      data: 2,
+    });
+    store.dispatch(END);
+    await store.sagaTask.toPromise();
+  }
+);
 
 export default About;
