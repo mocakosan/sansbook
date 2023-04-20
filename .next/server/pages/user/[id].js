@@ -644,7 +644,7 @@ var effects_ = __webpack_require__("RmXt");
 var external_axios_ = __webpack_require__("zr5I");
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
-// EXTERNAL MODULE: ./reducers/post.js
+// EXTERNAL MODULE: ./reducers/post.js + 1 modules
 var post = __webpack_require__("p+NB");
 
 // EXTERNAL MODULE: ./reducers/user.js
@@ -3296,7 +3296,7 @@ const PostImages = ({
 // EXTERNAL MODULE: ./components/hooks/useInput.js
 var useInput = __webpack_require__("8QKS");
 
-// EXTERNAL MODULE: ./reducers/post.js
+// EXTERNAL MODULE: ./reducers/post.js + 1 modules
 var reducers_post = __webpack_require__("p+NB");
 
 // CONCATENATED MODULE: ./components/CommentForm.js
@@ -3709,53 +3709,66 @@ module.exports = require("@ant-design/icons");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export initialState */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return LIKE_POST_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return LIKE_POST_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return LIKE_POST_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return UNLIKE_POST_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return UNLIKE_POST_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return UNLIKE_POST_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return LOAD_POST_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return LOAD_POST_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return LOAD_POST_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return LOAD_POSTS_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return LOAD_POSTS_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return LOAD_POSTS_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return LOAD_USER_POSTS_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return LOAD_USER_POSTS_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return LOAD_USER_POSTS_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return LOAD_HASHTAG_POSTS_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return LOAD_HASHTAG_POSTS_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return LOAD_HASHTAG_POSTS_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return ADD_POST_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return ADD_POST_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ADD_POST_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return UPLOAD_IMAGES_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return UPLOAD_IMAGES_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return UPLOAD_IMAGES_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return REMOVE_POST_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return REMOVE_POST_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return REMOVE_POST_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ADD_COMMENT_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return ADD_COMMENT_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ADD_COMMENT_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return RETWEET_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return RETWEET_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return RETWEET_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return REMOVE_IMAGE; });
-/* unused harmony export addPost */
-/* unused harmony export addCommnet */
-/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2WPw");
-/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(shortid__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("T5ka");
-/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(immer__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _faker_js_faker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("2/VE");
-/* harmony import */ var _faker_js_faker__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_faker_js_faker__WEBPACK_IMPORTED_MODULE_2__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "h", function() { return /* binding */ LIKE_POST_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "i", function() { return /* binding */ LIKE_POST_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "g", function() { return /* binding */ LIKE_POST_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "D", function() { return /* binding */ UNLIKE_POST_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "E", function() { return /* binding */ UNLIKE_POST_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "C", function() { return /* binding */ UNLIKE_POST_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "q", function() { return /* binding */ LOAD_POST_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "r", function() { return /* binding */ LOAD_POST_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "p", function() { return /* binding */ LOAD_POST_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "n", function() { return /* binding */ LOAD_POSTS_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "o", function() { return /* binding */ LOAD_POSTS_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "m", function() { return /* binding */ LOAD_POSTS_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "t", function() { return /* binding */ LOAD_USER_POSTS_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "u", function() { return /* binding */ LOAD_USER_POSTS_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "s", function() { return /* binding */ LOAD_USER_POSTS_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "k", function() { return /* binding */ LOAD_HASHTAG_POSTS_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "l", function() { return /* binding */ LOAD_HASHTAG_POSTS_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "j", function() { return /* binding */ LOAD_HASHTAG_POSTS_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ ADD_POST_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "f", function() { return /* binding */ ADD_POST_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ ADD_POST_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "G", function() { return /* binding */ UPLOAD_IMAGES_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "H", function() { return /* binding */ UPLOAD_IMAGES_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "F", function() { return /* binding */ UPLOAD_IMAGES_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "x", function() { return /* binding */ REMOVE_POST_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "y", function() { return /* binding */ REMOVE_POST_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "w", function() { return /* binding */ REMOVE_POST_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ ADD_COMMENT_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ ADD_COMMENT_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ ADD_COMMENT_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "A", function() { return /* binding */ RETWEET_REQUEST; });
+__webpack_require__.d(__webpack_exports__, "B", function() { return /* binding */ RETWEET_SUCCESS; });
+__webpack_require__.d(__webpack_exports__, "z", function() { return /* binding */ RETWEET_FAILURE; });
+__webpack_require__.d(__webpack_exports__, "v", function() { return /* binding */ REMOVE_IMAGE; });
+
+// UNUSED EXPORTS: initialState, addPost, addCommnet
+
+// EXTERNAL MODULE: external "shortid"
+var external_shortid_ = __webpack_require__("2WPw");
+
+// EXTERNAL MODULE: external "immer"
+var external_immer_ = __webpack_require__("T5ka");
+
+// CONCATENATED MODULE: ./util/produce.js
+
+/* harmony default export */ var produce = ((...args) => {
+  //immer가 익스플로어에서도 작동할수 있게 하는방법
+  Object(external_immer_["enableES5"])();
+  return Object(external_immer_["produce"])(...args);
+});
+// EXTERNAL MODULE: external "@faker-js/faker"
+var faker_ = __webpack_require__("2/VE");
+
+// CONCATENATED MODULE: ./reducers/post.js
 
 
 
-_faker_js_faker__WEBPACK_IMPORTED_MODULE_2__["faker"].seed(123);
+faker_["faker"].seed(123);
 const initialState = {
   singlePost: null,
   mainPosts: [],
@@ -3933,7 +3946,7 @@ const addCommnet = data => ({
 // });
 
 //reducer : 이전 상태를 액션을 통해 다음 상태로 만들어내는 함수(불변성은 지키면서)
-const reducer = (state = initialState, action) => immer__WEBPACK_IMPORTED_MODULE_1___default()(state, draft => {
+const reducer = (state = initialState, action) => produce(state, draft => {
   switch (action.type) {
     case RETWEET_REQUEST:
       draft.retweetLoading = true;
@@ -4103,7 +4116,7 @@ const reducer = (state = initialState, action) => immer__WEBPACK_IMPORTED_MODULE
       break;
   }
 });
-/* harmony default export */ __webpack_exports__["I"] = (reducer);
+/* harmony default export */ var post = __webpack_exports__["I"] = (reducer);
 
 /***/ }),
 

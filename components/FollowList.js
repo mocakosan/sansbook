@@ -27,7 +27,9 @@ const FollowList = ({ header, data, onClickMore, loading }) => {
       header={<div>{header}</div>}
       loadMore={
         <div style={{ textAlign: "center", margin: "10px 0" }}>
-          <Button onClick={onClickMore}>더 보기</Button>
+          <Button onClick={onClickMore} loading={loading}>
+            더 보기
+          </Button>
         </div>
       }
       bordered

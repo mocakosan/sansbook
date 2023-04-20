@@ -42,7 +42,7 @@ const About = () => {
             <Card.Meta
               avatar={<Avatar>{userInfo.nickname[0]}</Avatar>}
               title={userInfo.nickname}
-              description="노드버드 매니아"
+              description="sansbook development"
             />
           </Card>
         ) : null}
