@@ -101,7 +101,7 @@ module.exports =
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"backUrl\", function() { return backUrl; });\nconst backUrl = \"http://13.125.160.174\";//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jb21wb25lbnRzL2NvbmZpZy9jb25maWcuanM/ODczMyJdLCJuYW1lcyI6WyJiYWNrVXJsIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQU8sTUFBTUEsT0FBTyxHQUFHLHVCQUF1QiIsImZpbGUiOiIuL2NvbXBvbmVudHMvY29uZmlnL2NvbmZpZy5qcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjb25zdCBiYWNrVXJsID0gXCJodHRwOi8vMTMuMTI1LjE2MC4xNzRcIjtcbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./components/config/config.js\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"backUrl\", function() { return backUrl; });\nconst backUrl = \"http://3.37.119.174\";//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jb21wb25lbnRzL2NvbmZpZy9jb25maWcuanM/ODczMyJdLCJuYW1lcyI6WyJiYWNrVXJsIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQU8sTUFBTUEsT0FBTyxHQUFHLHFCQUFxQiIsImZpbGUiOiIuL2NvbXBvbmVudHMvY29uZmlnL2NvbmZpZy5qcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjb25zdCBiYWNrVXJsID0gXCJodHRwOi8vMy4zNy4xMTkuMTc0XCI7XG4iXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./components/config/config.js\n");
 
 /***/ }),
 
