@@ -10,6 +10,7 @@ import useSWR from "swr";
 import axios from "axios";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
+import { backUrl } from "../components/config/config";
 
 const fetcher = (url) =>
   axios.get(url, { withCredentials: true }).then((result) => result.data);
@@ -19,11 +20,11 @@ const Profile = () => {
   const [followingsLimit, setFollowingsLimit] = useState(3);
   const [followersLimit, setFollowersLimit] = useState(3);
   const { data: followersData, error: followerError } = useSWR(
-    `http://localhost:3001/user/followers?limit=${followersLimit}`,
+    `${backUrl}/user/followers?limit=${followersLimit}`,
     fetcher
   );
   const { data: followingsData, error: followingError } = useSWR(
-    `http://localhost:3001 /user/followings?limit=${followingsLimit}`,
+    `${backUrl}/user/followings?limit=${followingsLimit}`,
     fetcher
   );
 
