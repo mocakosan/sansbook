@@ -113,7 +113,7 @@ const PostCard = ({ post }) => {
           </Popover>,
         ]}
         title={
-          post.RetweetId ? `${post.user.nickname}님이 공유하셨습니다` : null
+          post.RetweetId ? `${post.User.nickname}님이 공유하셨습니다` : null
         }
         extra={id && <FollowButton post={post} />}
       >
@@ -147,13 +147,13 @@ const PostCard = ({ post }) => {
             </span>
             <Card.Meta
               avatar={
-                <Link href={`/user/${post.user.id}`}>
+                <Link href={`/user/${post.User.id}`}>
                   <a>
-                    <Avatar>{post.user.nickname[0]}</Avatar>
+                    <Avatar>{post.User.nickname[0]}</Avatar>
                   </a>
                 </Link>
               }
-              title={post.user.nickname}
+              title={post.User.nickname}
               description={<PostCardContent postData={post.content} />}
             />
           </>
@@ -169,11 +169,11 @@ const PostCard = ({ post }) => {
             renderItem={(item) => (
               <li>
                 <Comment
-                  author={item.user?.nickname}
+                  author={item.User?.nickname}
                   avatar={
-                    <Link href={`/user/${item.user?.id}`}>
+                    <Link href={`/user/${item.User?.id}`}>
                       <a>
-                        <Avatar>{item.user?.nickname[0]}</Avatar>
+                        <Avatar>{item.User?.nickname[0]}</Avatar>
                       </a>
                     </Link>
                   }
