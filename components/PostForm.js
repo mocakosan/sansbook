@@ -7,7 +7,7 @@ import {
   UPLOAD_IMAGES_REQUEST,
   REMOVE_IMAGE,
 } from "../reducers/post";
-import useInput from "../hooks/useInput";
+import useInput from "../components/hooks/useInput";
 import { backUrl } from "../config/config";
 
 const PostForm = () => {
