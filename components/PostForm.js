@@ -25,7 +25,7 @@ const PostForm = () => {
   const onSubmitForm = useCallback(() => {
     const formData = new FormData();
     imagePaths.forEach((p) => {
-      formData.append("image", p);
+      formData.append("Images", p);
     });
     formData.append("content", text);
     return dispatch({
