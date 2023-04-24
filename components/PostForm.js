@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect, useRef } from "react";
-import { Button, Form, Input } from "antd";
+import { Form, Input, Button } from "antd";
+import { useCallback, useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   ADD_POST_REQUEST,
   UPLOAD_IMAGES_REQUEST,
   REMOVE_IMAGE,
 } from "../reducers/post";
-import useInput from "../components/hooks/useInput";
-import { backUrl } from "../config/config";
+import useInput from "./hooks/useInput";
+import { backUrl } from "./config/config";
 
 const PostForm = () => {
   const { imagePaths, addPostDone } = useSelector((state) => state.post);
@@ -62,7 +61,6 @@ const PostForm = () => {
     },
     []
   );
-
   return (
     <Form
       style={{ margin: "10px 0 20px" }}
@@ -73,7 +71,7 @@ const PostForm = () => {
         value={text}
         onChange={onChangeText}
         maxLength={140}
-        placeholder="내용을 작성하시오"
+        placeholder="어떤 신기한 일이 있었나요?"
       />
       <div>
         <input
