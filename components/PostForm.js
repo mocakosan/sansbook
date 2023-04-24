@@ -22,10 +22,13 @@ const PostForm = () => {
     }
   }, [addPostDone]);
 
-  const onSubmitForm = useCallback(() => {
+  const onSubmit = useCallback(() => {
+    if (!text || !text.trim()) {
+      return alert("게시글을 작성하세요.");
+    }
     const formData = new FormData();
     imagePaths.forEach((p) => {
-      formData.append("Images", p);
+      formData.append("image", p);
     });
     formData.append("content", text);
     return dispatch({
@@ -34,9 +37,11 @@ const PostForm = () => {
     });
   }, [text, imagePaths]);
 
+  //const imageInput = useRef();
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
+
   const onChangeImages = useCallback((e) => {
     console.log("images", e.target.files);
     const imageFormData = new FormData();
@@ -48,6 +53,7 @@ const PostForm = () => {
       data: imageFormData,
     });
   }, []);
+
   const onRemoveImage = useCallback(
     (index) => () => {
       dispatch({
@@ -61,7 +67,7 @@ const PostForm = () => {
     <Form
       style={{ margin: "10px 0 20px" }}
       encType="multipart/form-data"
-      onFinish={onSubmitForm}
+      onFinish={onSubmit}
     >
       <Input.TextArea
         value={text}
