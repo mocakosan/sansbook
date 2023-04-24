@@ -72,7 +72,7 @@ const PostForm = () => {
       <div>
         <input
           type="file"
-          name="Imagea"
+          name="image"
           multiple
           hidden
           ref={imageInput}
