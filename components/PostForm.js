@@ -1,21 +1,20 @@
-import { Form, Input, Button } from "antd";
-import { useCallback, useRef, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
+import { Button, Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   ADD_POST_REQUEST,
   UPLOAD_IMAGES_REQUEST,
   REMOVE_IMAGE,
 } from "../reducers/post";
-import useInput from "./hooks/useInput";
-import { backUrl } from "./config/config";
+import useInput from "../hooks/useInput";
+import { backUrl } from "../config/config";
 
 const PostForm = () => {
-  const { imagePaths, addPostDone, addPostLoading } = useSelector(
-    (state) => state.post
-  );
-  const [text, onChangeText, setText] = useInput("");
+  const { imagePaths, addPostDone } = useSelector((state) => state.post);
   const dispatch = useDispatch();
-  const imageInput = useRef();
+  const [text, onChangeText, setText] = useInput("");
+
   useEffect(() => {
     if (addPostDone) {
       setText("");
@@ -28,7 +27,7 @@ const PostForm = () => {
     }
     const formData = new FormData();
     imagePaths.forEach((p) => {
-      formData.append("Images", p);
+      formData.append("image", p);
     });
     formData.append("content", text);
     return dispatch({
@@ -37,7 +36,7 @@ const PostForm = () => {
     });
   }, [text, imagePaths]);
 
-  //const imageInput = useRef();
+  const imageInput = useRef();
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
@@ -63,6 +62,7 @@ const PostForm = () => {
     },
     []
   );
+
   return (
     <Form
       style={{ margin: "10px 0 20px" }}
@@ -73,7 +73,7 @@ const PostForm = () => {
         value={text}
         onChange={onChangeText}
         maxLength={140}
-        placeholder="어떤 일이 생겼나요"
+        placeholder="내용을 작성하시오"
       />
       <div>
         <input
@@ -85,19 +85,18 @@ const PostForm = () => {
           onChange={onChangeImages}
         />
         <Button onClick={onClickImageUpload}>이미지 업로드</Button>
-        <Button
-          type="primary"
-          style={{ float: "right" }}
-          htmlType="submit"
-          loading={addPostLoading}
-        >
-          짹쨱
+        <Button type="primary" style={{ float: "right" }} htmlType="submit">
+          짹짹
         </Button>
       </div>
       <div>
         {imagePaths.map((v, i) => (
           <div key={v} style={{ display: "inline-block" }}>
-            <img src={v} style={{ width: "200px" }} alt={v} />
+            <img
+              src={v.replace(/\/thumb\//, "/original/")}
+              style={{ width: "200px" }}
+              alt={v}
+            />
             <div>
               <Button onClick={onRemoveImage(i)}>제거</Button>
             </div>
