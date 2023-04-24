@@ -92,7 +92,7 @@ const PostCard = ({ post }) => {
             key="more"
             content={
               <Button.Group>
-                {id && post.user?.id === id ? (
+                {id && post.User?.id === id ? (
                   <>
                     <Button>수정</Button>
                     <Button
@@ -113,7 +113,7 @@ const PostCard = ({ post }) => {
           </Popover>,
         ]}
         title={
-          post.RetweetId ? `${post.user?.nickname}님이 공유하셨습니다` : null
+          post.RetweetId ? `${post.User?.nickname}님이 공유하셨습니다` : null
         }
         extra={id && <FollowButton post={post} />}
       >
@@ -130,13 +130,13 @@ const PostCard = ({ post }) => {
             </span>
             <Card.Meta
               avatar={
-                <Link href={`/user/${post.Retweet.user?.id}`}>
+                <Link href={`/user/${post.Retweet.User?.id}`}>
                   <a>
-                    <Avatar>{post.Retweet.user?.nickname[0]}</Avatar>
+                    <Avatar>{post.Retweet.User?.nickname[0]}</Avatar>
                   </a>
                 </Link>
               }
-              title={post.Retweet.user.nickname}
+              title={post.Retweet.User.nickname}
               description={<PostCardContent postData={post.Retweet.content} />}
             />
           </Card>
@@ -147,13 +147,13 @@ const PostCard = ({ post }) => {
             </span>
             <Card.Meta
               avatar={
-                <Link href={`/user/${post.user?.id}`}>
+                <Link href={`/user/${post.User?.id}`}>
                   <a>
-                    <Avatar>{post.user?.nickname[0]}</Avatar>
+                    <Avatar>{post.User?.nickname[0]}</Avatar>
                   </a>
                 </Link>
               }
-              title={post.user?.nickname}
+              title={post.User?.nickname}
               description={<PostCardContent postData={post.content} />}
             />
           </>
@@ -169,11 +169,11 @@ const PostCard = ({ post }) => {
             renderItem={(item) => (
               <li>
                 <Comment
-                  author={item.user?.nickname}
+                  author={item.User?.nickname}
                   avatar={
                     <Link href={`/user/${item.user?.id}`}>
                       <a>
-                        <Avatar>{item.user?.nickname[0]}</Avatar>
+                        <Avatar>{item.User?.nickname[0]}</Avatar>
                       </a>
                     </Link>
                   }
@@ -191,7 +191,7 @@ const PostCard = ({ post }) => {
 PostCard.propTypes = {
   post: PropTypes.shape({
     id: PropTypes.number,
-    user: PropTypes.object,
+    User: PropTypes.object,
     content: PropTypes.string,
     createdAt: PropTypes.string,
     Comment: PropTypes.arrayOf(PropTypes.object),
