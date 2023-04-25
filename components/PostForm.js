@@ -26,7 +26,7 @@ const PostForm = () => {
     }
     const formData = new FormData();
     imagePaths.forEach((p) => {
-      formData.append("images", p);
+      formData.append("image", p);
     });
     formData.append("content", text);
     return dispatch({
@@ -45,7 +45,7 @@ const PostForm = () => {
     console.log("images", e.target.files);
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
-      imageFormData.append("images", f);
+      imageFormData.append("image", f);
     });
     dispatch({
       type: UPLOAD_IMAGES_REQUEST,
