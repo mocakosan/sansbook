@@ -36,7 +36,6 @@ const PostForm = () => {
   }, [text, imagePaths]);
 
   const imageInput = useRef();
-  console.log(imageInput);
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
