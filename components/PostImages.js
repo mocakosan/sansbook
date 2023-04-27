@@ -5,7 +5,6 @@ import ImagesZoom from "./imagesZoom";
 import { backUrl } from "./config/config";
 
 const PostImages = ({ images }) => {
-  const image = encodeURIComponent(images);
   const [showImagesZoom, setShowImagesZoom] = useState(false);
   const onZoom = useCallback(() => {
     setShowImagesZoom(true);
@@ -18,11 +17,11 @@ const PostImages = ({ images }) => {
       <>
         <img
           role="presentation"
-          src={`${image[0].src}`}
-          alt={image[0].src}
+          src={encodeURIComponent(`${images[0].src}`)}
+          alt={images[0].src}
           onClick={onZoom}
         />
-        {showImagesZoom && <ImagesZoom images={image} onClose={onClose} />}
+        {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>
     );
   }
@@ -32,18 +31,20 @@ const PostImages = ({ images }) => {
         <img
           role="presentation"
           style={{ width: "50%", display: "inline-block" }}
-          src={`${image[0].src}`}
-          alt={image[0].src}
+          src={encodeURIComponent(`${images[0].src}`)}
+          alt={images[0].src}
           onClick={onZoom}
         />
         <img
           role="presentation"
           style={{ width: "50%", display: "inline-block" }}
-          src={`${image[1].src}`}
-          alt={image[1].src}
+          src={encodeURIComponent(`${images[1].src}`)}
+          alt={images[1].src}
           onClick={onZoom}
         />
-        {showImagesZoom && <ImagesZoom images={image} onClose={onClose} />}
+        {showImagesZoom && (
+          <ImagesZoom images={encodeURIComponent(images)} onClose={onClose} />
+        )}
       </>
     );
   }
@@ -53,8 +54,8 @@ const PostImages = ({ images }) => {
         <img
           role="presentation"
           style={{ width: "50%" }}
-          src={`${image[0].src}`}
-          alt={image[0].src}
+          src={encodeURIComponent(`${images[0].src}`)}
+          alt={images[0].src}
           onClick={onZoom}
         />
         <div
@@ -73,7 +74,9 @@ const PostImages = ({ images }) => {
           개의 사진 더보기
         </div>
       </div>
-      {showImagesZoom && <ImagesZoom images={image} onClose={onClose} />}
+      {showImagesZoom && (
+        <ImagesZoom images={encodeURIComponent(images)} onClose={onClose} />
+      )}
     </>
   );
 };
