@@ -12,6 +12,7 @@ const PostImages = ({ images }) => {
   const onClose = useCallback(() => {
     setShowImagesZoom(false);
   }, []);
+  //이미지 1개일떄
   if (images.length === 1) {
     return (
       <>
