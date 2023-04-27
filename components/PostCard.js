@@ -75,7 +75,11 @@ const PostCard = ({ post }) => {
   return (
     <div style={{ marginBottom: 10 }}>
       <Card
-        cover={post.Images[0] && <PostImages images={post.Images} />}
+        cover={
+          post.Images[0] && (
+            <PostImages images={encodeURIComponent(post.Images)} />
+          )
+        }
         actions={[
           <RetweetOutlined key="retweet" onClick={onRetweet} />,
           liked ? (
@@ -121,7 +125,7 @@ const PostCard = ({ post }) => {
           <Card
             cover={
               post.Retweet.Images[0] && (
-                <PostImages images={post.Retweet.Images} />
+                <PostImages images={encodeURIComponent(post.Retweet.Images)} />
               )
             }
           >
