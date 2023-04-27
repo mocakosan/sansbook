@@ -90,11 +90,7 @@ const PostForm = () => {
       <div>
         {imagePaths.map((v, i) => (
           <div key={v} style={{ display: "inline-block" }}>
-            <img
-              src={encodeURIComponent(v)}
-              style={{ width: "200px" }}
-              alt={v}
-            />
+            <img src={v} style={{ width: "200px" }} alt={v} />
             <div>
               <Button onClick={onRemoveImage(i)}>제거</Button>
             </div>
