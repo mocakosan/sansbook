@@ -186,7 +186,7 @@ function* addPost(action) {
 
 //Upload images
 function uploadImagesAPI(data) {
-  return axios.post("/post/images", data);
+  return axios.post("/post/images", encodeURIComponent(data));
 }
 
 function* uploadImages(action) {
