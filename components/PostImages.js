@@ -18,7 +18,7 @@ const PostImages = ({ images }) => {
       <>
         <img
           role="presentation"
-          src={encodeURIComponent(`${images[0].src}`)}
+          src={`${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
