@@ -91,7 +91,7 @@ const PostForm = () => {
         {imagePaths.map((v, i) => (
           <div key={v} style={{ display: "inline-block" }}>
             <img
-              src={replace("/original/")}
+              src={encodeURIComponent(v)}
               style={{ width: "200px" }}
               alt={v}
             />
