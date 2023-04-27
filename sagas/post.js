@@ -160,7 +160,7 @@ function* loadHashtagPosts(action) {
 
 //AddPost
 function addPostAPI(data) {
-  return axios.post("/post", data);
+  return axios.post("/post", encodeURIComponent(data));
 }
 
 function* addPost(action) {
@@ -186,7 +186,7 @@ function* addPost(action) {
 
 //Upload images
 function uploadImagesAPI(data) {
-  return axios.post("/post/images", encodeURIComponent(data));
+  return axios.post("/post/images", data);
 }
 
 function* uploadImages(action) {
