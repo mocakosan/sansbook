@@ -18,7 +18,7 @@ const PostImages = ({ images }) => {
       <>
         <img
           role="presentation"
-          src={`${encodeURIComponent(images[0]).src}`}
+          src={`${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
@@ -32,14 +32,14 @@ const PostImages = ({ images }) => {
         <img
           role="presentation"
           style={{ width: "50%", display: "inline-block" }}
-          src={`${encodeURIComponent(images[0]).src}`}
+          src={`${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
         <img
           role="presentation"
           style={{ width: "50%", display: "inline-block" }}
-          src={`${encodeURIComponent(images[1]).src}`}
+          src={`${images[1].src}`}
           alt={images[1].src}
           onClick={onZoom}
         />
@@ -55,7 +55,7 @@ const PostImages = ({ images }) => {
         <img
           role="presentation"
           style={{ width: "50%" }}
-          src={`${encodeURIComponent(images[0]).src}`}
+          src={`${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
