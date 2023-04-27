@@ -160,7 +160,7 @@ function* loadHashtagPosts(action) {
 
 //AddPost
 function addPostAPI(data) {
-  return axios.post("/post", encodeURIComponent(data));
+  return axios.post("/post", data);
 }
 
 function* addPost(action) {
@@ -191,7 +191,7 @@ function uploadImagesAPI(data) {
 
 function* uploadImages(action) {
   try {
-    const result = yield call(uploadImagesAPI, action.data);
+    const result = yield call(uploadImagesAPI, action.encodeURIComponent(data));
     yield put({
       type: UPLOAD_IMAGES_SUCCESS,
       data: result.data,
