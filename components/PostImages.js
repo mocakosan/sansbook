@@ -5,7 +5,6 @@ import ImagesZoom from "./imagesZoom";
 import { backUrl } from "./config/config";
 
 const PostImages = ({ images }) => {
-  const image = require(images).default;
   const [showImagesZoom, setShowImagesZoom] = useState(false);
   const onZoom = useCallback(() => {
     setShowImagesZoom(true);
@@ -19,7 +18,7 @@ const PostImages = ({ images }) => {
       <>
         <img
           role="presentation"
-          src={`${image[0].src}`}
+          src={`${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
