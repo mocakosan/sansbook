@@ -18,7 +18,7 @@ const PostImages = ({ images }) => {
       <>
         <img
           role="presentation"
-          src={`${require(images[0].src).default}`}
+          src={`${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
