@@ -24,14 +24,14 @@ const Post = () => {
     <AppLayout>
       <Head>
         <title>
-          {singlePost?.user.nickname}
+          {singlePost?.User.nickname}
           님의 글
         </title>
 
         <meta name="description" content={singlePost?.content} />
         <meta
           property="og:title"
-          content={`${singlePost?.user.nickname}님의 게시글`}
+          content={`${singlePost?.User.nickname}님의 게시글`}
         />
         <meta property="og:description" content={singlePost?.content} />
         <meta
