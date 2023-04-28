@@ -5,7 +5,7 @@ import ImagesZoom from "./imagesZoom";
 import { backUrl } from "./config/config";
 
 const PostImages = ({ images }) => {
-  const image = encodeURIComponent(images);
+  const image = require(images).default;
   const [showImagesZoom, setShowImagesZoom] = useState(false);
   const onZoom = useCallback(() => {
     setShowImagesZoom(true);
