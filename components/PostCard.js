@@ -38,7 +38,7 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, [id]);
-  const onUnLike = useCallback(() => {
+  const onUnlike = useCallback(() => {
     if (!id) {
       return alert("로그인이 필요합니다.");
     }
@@ -70,7 +70,7 @@ const PostCard = ({ post }) => {
     });
   }, []);
 
-  const liked = post.Likers?.find((v) => v.id === id);
+  const liked = post.Likers.find((v) => v.id === id);
 
   return (
     <div style={{ marginBottom: 10 }}>
@@ -82,7 +82,7 @@ const PostCard = ({ post }) => {
             <HeartTwoTone
               twoToneColor="#eb2f96"
               key="heart"
-              onClick={onUnLike}
+              onClick={onUnlike}
             />
           ) : (
             <HeartOutlined key="heart" onClick={onLike} />
