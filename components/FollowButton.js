@@ -9,7 +9,7 @@ const FollowButton = ({ post }) => {
   const { me, followLoading, unfollowLoading } = useSelector(
     (state) => state.user
   );
-
+  // post.User로 바꿔서 팔로우기능 완료
   const isFollowing = me?.Followings.find((v) => v.id === post.User?.id);
   const onClickButton = useCallback(() => {
     if (isFollowing) {
