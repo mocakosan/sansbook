@@ -13,6 +13,9 @@ import {
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
   ADD_POST_FAILURE,
+  UPDATE_POST_FAILURE,
+  UPDATE_POST_REQUEST,
+  UPDATE_POST_SUCCESS,
   LOAD_POST_FAILURE,
   LOAD_POST_REQUEST,
   LOAD_POST_SUCCESS,
@@ -231,6 +234,27 @@ function* removePost(action) {
   }
 }
 
+//Update post
+function updatePostAPI(data) {
+  return axios.patch(`/post/${data.PostId}`, data);
+}
+
+function* updatePost(action) {
+  try {
+    const result = yield call(updatePostAPI, action.data);
+    yield put({
+      type: UPDATE_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UPDATE_POST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 //AddCommnet
 function addCommentAPI(data) {
   return axios.post(`/post/${data.postId}/comment`, data);
@@ -330,6 +354,11 @@ function* watchAddPost() {
 function* watchRemovePost() {
   yield takeLatest(REMOVE_POST_REQUEST, removePost);
 }
+
+function* watchUpdatePost() {
+  yield takeLatest(UPDATE_POST_REQUEST, updatePost);
+}
+
 function* watchAddComment() {
   yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 }
@@ -344,6 +373,7 @@ export default function* postSaga() {
     fork(watchUnLikePost),
     fork(watchLikePost),
     fork(watchAddPost),
+    fork(watchUpdatePost),
     fork(watchLoadPost),
     fork(watchLoadPosts),
     fork(watchLoadUserPosts),
