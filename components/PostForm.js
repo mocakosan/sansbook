@@ -22,7 +22,7 @@ const PostForm = () => {
 
   const onSubmit = useCallback(() => {
     if (!text || !text.trim()) {
-      return alert("°Ô½Ã±ÛÀ» ÀÛ¼ºÇÏ¼¼¿ä.");
+      return alert("ê²Œì‹œê¸€ì„ ìž‘ì„±í•˜ì„¸ìš”.");
     }
     const formData = new FormData();
     imagePaths.forEach((p) => {
@@ -71,7 +71,7 @@ const PostForm = () => {
         value={text}
         onChange={onChangeText}
         maxLength={140}
-        placeholder="¾î¶² ½Å±âÇÑ ÀÏÀÌ ÀÖ¾ú³ª¿ä?"
+        placeholder="ì–´ë–¤ ì‹ ê¸°í•œ ì¼ì´ ìžˆì—ˆë‚˜ìš”?"
       />
       <div>
         <input
@@ -82,9 +82,9 @@ const PostForm = () => {
           ref={imageInput}
           onChange={onChangeImages}
         />
-        <Button onClick={onClickImageUpload}>ÀÌ¹ÌÁö ¾÷·Îµå</Button>
+        <Button onClick={onClickImageUpload}>ì´ë¯¸ì§€ ì—…ë¡œë“œ</Button>
         <Button type="primary" style={{ float: "right" }} htmlType="submit">
-          ¾÷·Îµå
+          ì—…ë¡œë“œ
         </Button>
       </div>
       <div>
@@ -96,7 +96,7 @@ const PostForm = () => {
               alt={v}
             />
             <div>
-              <Button onClick={onRemoveImage(i)}>Á¦°Å</Button>
+              <Button onClick={onRemoveImage(i)}>ì œê±°</Button>
             </div>
           </div>
         ))}
