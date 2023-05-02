@@ -36,7 +36,13 @@ const AppLayout = ({ children }) => {
   return (
     <div>
       <Global />
-      <Menu mode="horizontal">
+      <Menu
+        mode="horizontal"
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+        }}
+      >
         <Menu.Item>
           <Link href="/">
             <a>Sansbook</a>
@@ -55,6 +61,11 @@ const AppLayout = ({ children }) => {
             onChange={onChangeSearchInput}
             onSearch={onSearch}
           />
+        </Menu.Item>
+        <Menu.Item>
+          <Link href="/chat">
+            <a>DM</a>
+          </Link>
         </Menu.Item>
         <Menu.Item>
           <Link href="/signup">
