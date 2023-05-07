@@ -9,6 +9,7 @@ import LoginForm from "../components/LoginForm";
 import { createGlobalStyle } from "styled-components";
 import Router from "next/router";
 import useInput from "./hooks/useInput";
+import Chat from "../pages/chat";
 
 const SearchInput = styled(Input.Search)`
   vertical-align: middle;
