@@ -1,4 +1,13 @@
-import { Card, Button, Avatar, Popover, List, Comment } from "antd";
+import {
+  Card,
+  Button,
+  Avatar,
+  Popover,
+  List,
+  Comment,
+  Modal,
+  Input,
+} from "antd";
 import {
   RetweetOutlined,
   HeartOutlined,
@@ -22,15 +31,27 @@ import {
 } from "../reducers/post";
 import Link from "next/link";
 import dayjs from "dayjs";
+import useInput from "./hooks/useInput";
 
 dayjs.locale("ko");
+const { TextArea } = Input;
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
-  const { removePostLoading } = useSelector((state) => state.post);
   const [commentFormOpened, setCommentFormOpened] = useState(false);
-  const id = useSelector((state) => state.user?.me?.id);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [reportText, onChangeReportText] = useInput("");
   const [editMode, setEditMode] = useState(false);
+  const removePostLoading = useSelector(
+    (state) => state.post.removePostLoading
+  );
+  const reportPostLoading = useSelector(
+    (state) => state.post.reportPostLoading
+  );
+  const reportPostDone = useSelector((state) => state.post.reportPostDone);
+  const reportPostError = useSelector((state) => state.post.reportPostError);
+  const id = useSelector((state) => state.user.me?.id);
+
   const onClickUpdate = useCallback(() => {
     setEditMode(true);
   }, []);
@@ -38,6 +59,19 @@ const PostCard = ({ post }) => {
   const onCancelUpdate = useCallback(() => {
     setEditMode(false);
   }, []);
+
+  const onChangePost = useCallback(
+    (editText) => () => {
+      dispatch({
+        type: UPDATE_POST_REQUEST,
+        data: {
+          PostId: post.id,
+          content: editText,
+        },
+      });
+    },
+    [post]
+  );
 
   const onLike = useCallback(() => {
     if (!id) {
@@ -57,23 +91,10 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, [id]);
-
   const onToggleComment = useCallback(() => {
     setCommentFormOpened((prev) => !prev);
   }, []);
 
-  const onChangePost = useCallback(
-    (editText) => () => {
-      dispatch({
-        type: UPDATE_POST_REQUEST,
-        data: {
-          PostId: post.id,
-          content: editText,
-        },
-      });
-    },
-    [post]
-  );
   const onRemovePost = useCallback(() => {
     if (!id) {
       return alert("로그인이 필요합니다.");
@@ -83,6 +104,7 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, [id]);
+
   const onRetweet = useCallback(() => {
     if (!id) {
       return alert("로그인이 필요합니다.");
@@ -91,12 +113,40 @@ const PostCard = ({ post }) => {
       type: RETWEET_REQUEST,
       data: post.id,
     });
+  }, [id]);
+
+  const onClickReport = useCallback(() => {
+    console.log("신고", post.id);
+    setModalVisible(true);
+  });
+
+  const onCloseModal = useCallback(() => {
+    setModalVisible(false);
   }, []);
 
-  const liked = post.Likers.find((v) => v.id === id);
+  const onSubmitReport = useCallback(() => {
+    console.log(id, post.id, reportText);
+    dispatch({
+      type: REPORT_POST_REQUEST,
+      data: {
+        postId: post.id,
+        content: reportText,
+      },
+    });
+  }, [reportText]);
 
+  useEffect(() => {
+    if (reportPostDone) {
+      setModalVisible(false);
+    }
+    if (reportPostError) {
+      setModalVisible(false);
+    }
+  }, [reportPostDone, reportPostError]);
+
+  const liked = post.Likers.find((v) => v.id === id);
   return (
-    <div style={{ marginBottom: 10 }}>
+    <div style={{ marginBottom: 20 }}>
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
@@ -110,26 +160,26 @@ const PostCard = ({ post }) => {
           ) : (
             <HeartOutlined key="heart" onClick={onLike} />
           ),
-          <MessageOutlined key="message" onClick={onToggleComment} />,
+          <MessageOutlined key="comment" onClick={onToggleComment} />,
           <Popover
             key="more"
             content={
               <Button.Group>
-                {id && post.User?.id === id ? (
+                {id && post.User.id === id ? (
                   <>
                     {!post.RetweetId && (
                       <Button onClick={onClickUpdate}>수정</Button>
                     )}
                     <Button
                       type="danger"
-                      onClick={onRemovePost}
                       loading={removePostLoading}
+                      onClick={onRemovePost}
                     >
                       삭제
                     </Button>
                   </>
                 ) : (
-                  <Button>신고</Button>
+                  <Button onClick={onClickReport}>신고</Button>
                 )}
               </Button.Group>
             }
@@ -138,10 +188,21 @@ const PostCard = ({ post }) => {
           </Popover>,
         ]}
         title={
-          post.RetweetId ? `${post.User?.nickname}님이 공유하셨습니다` : null
+          post.RetweetId ? `${post.User.nickname}님이 리트윗하셨습니다.` : null
         }
         extra={id && <FollowButton post={post} />}
       >
+        <Modal
+          title="신고하기"
+          visible={modalVisible}
+          onOk={onSubmitReport}
+          confirmLoading={reportPostLoading}
+          onCancel={onCloseModal}
+        >
+          <form>
+            <TextArea value={reportText} onChange={onChangeReportText} />
+          </form>
+        </Modal>
         {post.RetweetId && post.Retweet ? (
           <Card
             cover={
@@ -150,14 +211,14 @@ const PostCard = ({ post }) => {
               )
             }
           >
-            <span style={{ float: "right" }}>
-              {dayjs(post.createdAt).format("YYYY.MM.DD.")}
-            </span>
+            <div style={{ float: "right" }}>
+              {dayjs(post.createdAt).format("YYYY.MM.DD")}
+            </div>
             <Card.Meta
               avatar={
-                <Link href={`/user/${post.Retweet.User?.id}`}>
+                <Link href={`/user/${post.Retweet.User.id}`} prefetch={false}>
                   <a>
-                    <Avatar>{post.Retweet.User?.nickname[0]}</Avatar>
+                    <Avatar>{post.Retweet.User.nickname[0]}</Avatar>
                   </a>
                 </Link>
               }
@@ -173,18 +234,18 @@ const PostCard = ({ post }) => {
           </Card>
         ) : (
           <>
-            <span style={{ float: "right" }}>
-              {dayjs(post.createdAt).format("YYYY.MM.DD.")}
-            </span>
+            <div style={{ float: "right" }}>
+              {dayjs(post.createdAt).format("YYYY.MM.DD")}
+            </div>
             <Card.Meta
               avatar={
-                <Link href={`/user/${post.User?.id}`}>
+                <Link href={`/user/${post.User.id}`} prefetch={false}>
                   <a>
-                    <Avatar>{post.User?.nickname[0]}</Avatar>
+                    <Avatar>{post.User.nickname[0]}</Avatar>
                   </a>
                 </Link>
               }
-              title={post.User?.nickname}
+              title={post.User.nickname}
               description={
                 <PostCardContent
                   editMode={editMode}
@@ -207,11 +268,11 @@ const PostCard = ({ post }) => {
             renderItem={(item) => (
               <li>
                 <Comment
-                  author={item.User?.nickname}
+                  author={item.User.nickname}
                   avatar={
-                    <Link href={`/user/${item.user?.id}`}>
+                    <Link href={`/user/${item.User.id}`} prefetch={false}>
                       <a>
-                        <Avatar>{item.User?.nickname[0]}</Avatar>
+                        <Avatar>{item.User.nickname[0]}</Avatar>
                       </a>
                     </Link>
                   }
