@@ -14,7 +14,7 @@ const UserProfile = () => {
     <Card
       actions={[
         <div key="twit">
-          <Link href={`/user/${me.id}`}>
+          <Link href={`/user/${me.id}`} target="_blank">
             <a>
               짹쨱
               <br />

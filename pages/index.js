@@ -8,6 +8,19 @@ import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import { LOAD_POSTS_REQUEST } from "../reducers/post";
 import wrapper from "../store/configureStore";
 import axios from "axios";
+import { initializeApp } from "firebase/app";
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBhf4owwF00PhD081DycWXKkBSwDC1c2ko",
+//   authDomain: "sansbook-9e983.firebaseapp.com",
+//   projectId: "sansbook-9e983",
+//   storageBucket: "sansbook-9e983.appspot.com",
+//   messagingSenderId: "685154304023",
+//   appId: "1:685154304023:web:c9fe847f3f6cb076315c52",
+//   measurementId: "G-Y659ET9DWC",
+// };
+
+// const app = initializeApp(firebaseConfig);
 
 const Home = () => {
   const dispatch = useDispatch();

@@ -65,7 +65,14 @@ const Chat = () => {
       <Head>
         <title>Chat | Sansbook </title>
       </Head>
-      <AppLayout></AppLayout>
+      <AppLayout>
+        <FollowList
+          header="친구 목록"
+          data={followingsData}
+          onClickMore={loadMoreFollowings}
+          loading={!followingError && !followingsData}
+        />
+      </AppLayout>
     </>
   );
 };
